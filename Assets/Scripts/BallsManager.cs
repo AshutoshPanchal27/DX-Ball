@@ -51,7 +51,7 @@ public class BallsManager : MonoBehaviour
             initialBall.transform.position = ballPosition;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !GameManager.Instance.isGameStarted)
         {
             initialBallRigidBody.isKinematic = false;
             initialBallRigidBody.AddForce(new Vector2(0, initialBallSpeed));

@@ -48,3 +48,6 @@ TagManager:
   - name: Elements
     uniqueID: 3861393843
     locked: 0
+  - name: Bricks
+    uniqueID: 3836275429
+    locked: 0
