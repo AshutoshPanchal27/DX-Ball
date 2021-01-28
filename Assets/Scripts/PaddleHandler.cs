@@ -8,16 +8,19 @@ public class PaddleHandler : MonoBehaviour
     [SerializeField]
     Camera mainCamera;
 
+    [SerializeField]
+    SpriteRenderer spriteRenderer;
+
     Vector3 paddleInitialPos;
 
-    float paddleClampLeft = 135f;
-    float paddleClampRight = 410f;
+    float defaultLeftClamp = 135f;
+    float defaultRightClamp = 410f;
+
+    float defaultPaddleWidth = 200f;
 
     private void Start()
     {
         paddleInitialPos = this.transform.position;
-        paddleClampLeft = -1.443f;
-        paddleClampRight = 1.509f;
     }
 
     private void Update()
@@ -27,7 +30,11 @@ public class PaddleHandler : MonoBehaviour
 
     private void PaddleMovement()
     {
-        float mousePositionX = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, 0, 0)).x;
+        float paddleShift = (defaultPaddleWidth - ((defaultPaddleWidth / 2) * this.spriteRenderer.size.x)) / 2;
+        float paddleClampLeft = defaultLeftClamp - paddleShift;
+        float paddleClampRight = defaultRightClamp - paddleShift;
+        float clampedposition = Mathf.Clamp(Input.mousePosition.x, paddleClampLeft, paddleClampRight);
+        float mousePositionX = mainCamera.ScreenToWorldPoint(new Vector3(clampedposition, 0, 0)).x;
         this.transform.position = new Vector3(mousePositionX, paddleInitialPos.y, paddleInitialPos.z);
     }
 }
