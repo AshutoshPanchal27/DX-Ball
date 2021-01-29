@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    public event Action<int> OnLifeLost;
+
     public GameObject gameOverScreen;
     public GameObject gameCompletedScreen;
 
@@ -69,6 +71,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                OnLifeLost?.Invoke(this.Lives);
                 BallsManager.Instance.ResetBalls();
                 isGameStarted = false;
                 BricksManager.Instance.LoadLevel(BricksManager.Instance.CurrentLevel);

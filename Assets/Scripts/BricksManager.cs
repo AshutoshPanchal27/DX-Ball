@@ -26,6 +26,8 @@ public class BricksManager : MonoBehaviour
 
     #endregion
 
+    public static event Action OnLevelLoaded;
+
     private int maxRows = 17;
     private int maxCols = 12;
     private GameObject bricksContainer;
@@ -116,6 +118,7 @@ public class BricksManager : MonoBehaviour
         }
 
         this.initialBricksCount = this.remainingBricks.Count;
+        OnLevelLoaded?.Invoke();
     }
 
     private List<int[,]> LoadLevelsData()
